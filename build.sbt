@@ -14,15 +14,6 @@ val makeVersionProperties = taskKey[Seq[File]]("Creates a version.properties fil
 
 gitHeadCommitSha in ThisBuild := Process("git rev-parse HEAD").lines.head
 
-makeVersionProperties := {
-      val propFile = (resourceManaged in Compile).value / "version.properties"
-      val content = "version=%s" format (gitHeadCommitSha.value)
-      IO.write(propFile, content)
-      Seq(propFile)
-    }
-
-resourceGenerators in Compile <+= makeVersionProperties
-
 // Common settings and definitions
 
 def SuperDuperProject(name: String): Project = {
@@ -38,7 +29,15 @@ def SuperDuperProject(name: String): Project = {
 
 lazy val common = {
   SuperDuperProject("common")
-  .settings()
+  .settings(
+    makeVersionProperties := {
+      val propFile = (resourceManaged in Compile).value / "version.properties"
+      val content = "version=%s" format (gitHeadCommitSha.value)
+      IO.write(propFile, content)
+      Seq(propFile)
+    },
+    resourceGenerators in Compile <+= makeVersionProperties
+  )
 }
 
 val web = {
