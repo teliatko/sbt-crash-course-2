@@ -30,16 +30,20 @@ resourceGenerators in Compile <+= makeVersionProperties
 // Subprojects
 
 lazy val common = {
-	Project("common", file("common"))
-	.settings(
-		libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
-	)
+  Project("common", file("common"))
+  .settings(
+    version := "1.0",
+	scalaVersion := "2.10.0",
+	libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+  )
 }
 
 val web = {
   Project("web", file("web"))
   .dependsOn(common)
   .settings(
+  	version := "1.0",
+	scalaVersion := "2.10.0",
     libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
   )
 }
