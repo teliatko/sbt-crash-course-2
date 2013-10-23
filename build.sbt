@@ -4,7 +4,7 @@ name := "Hello"
 
 version := "1.0"
 
-scalaVersion := "2.10.0"
+scalaVersion in ThisBuild := "2.10.0"
 
 // libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
 
@@ -33,7 +33,6 @@ lazy val common = {
   Project("common", file("common"))
   .settings(
     version := "1.0",
-	scalaVersion := "2.10.0",
 	libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
   )
 }
@@ -43,7 +42,6 @@ val web = {
   .dependsOn(common)
   .settings(
   	version := "1.0",
-	scalaVersion := "2.10.0",
     libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
   )
 }
