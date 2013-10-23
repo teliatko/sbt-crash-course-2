@@ -2,10 +2,6 @@
 
 name := "Hello"
 
-version := "1.0"
-
-scalaVersion in ThisBuild := "2.10.0"
-
 // libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
 
 // Custom keys
@@ -27,21 +23,26 @@ makeVersionProperties := {
 
 resourceGenerators in Compile <+= makeVersionProperties
 
-// Subprojects
+// Common settings and definitions
 
-lazy val common = {
-  Project("common", file("common"))
+def SuperDuperProject(name: String): Project = {
+  Project(name, file(name))
   .settings(
     version := "1.0",
+    scalaVersion := "2.10.0",
 	libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
   )
 }
 
+// Subprojects
+
+lazy val common = {
+  SuperDuperProject("common")
+  .settings()
+}
+
 val web = {
-  Project("web", file("web"))
+  SuperDuperProject("web")
   .dependsOn(common)
-  .settings(
-  	version := "1.0",
-    libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
-  )
+  .settings()
 }
