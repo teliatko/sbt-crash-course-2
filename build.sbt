@@ -26,3 +26,10 @@ makeVersionProperties := {
     }
 
 resourceGenerators in Compile <+= makeVersionProperties
+
+// Subprojects
+
+lazy val common = {
+	Project("common", file("common"))
+	.settings()
+}
