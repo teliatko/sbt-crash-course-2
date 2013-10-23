@@ -30,6 +30,8 @@ def SuperDuperProject(name: String): Project = {
 lazy val common = {
   SuperDuperProject("common")
   .settings(
+    version in Compile := version.value + "-PROD",
+    version in Test := version.value + "-JUST-TEST",
     makeVersionProperties := {
       val propFile = (resourceManaged in Compile).value / "version.properties"
       val content = "version=%s" format (gitHeadCommitSha.value)
