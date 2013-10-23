@@ -1,7 +1,7 @@
 import org.scalatest.FunSuite
 
 class HelloSpec extends FunSuite {
-  test("it works") {
+  test("it works COMMON") {
     Console.out.println("Hello SBT rocks!")
   }
 }
