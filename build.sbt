@@ -37,8 +37,9 @@ lazy val common = {
 }
 
 val web = {
-	Project("web", file("web"))
-	.settings(
-		libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
-	)
+  Project("web", file("web"))
+  .dependsOn(common)
+  .settings(
+    libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+  )
 }
